@@ -1,6 +1,13 @@
 
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
+import { 
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuList,
+  NavigationMenuTrigger
+} from "@/components/ui/navigation-menu";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -27,6 +34,14 @@ const Navbar = () => {
     setIsMobileMenuOpen(false);
   };
 
+  const serviceItems = [
+    { name: "Manicure", id: "services-manicure" },
+    { name: "Pedicure", id: "services-pedicure" },
+    { name: "Nail Extensions", id: "services-extensions" },
+    { name: "Nail Art", id: "services-art" },
+    { name: "Nail Repair", id: "services-repair" }
+  ];
+
   return (
     <nav
       className={`fixed top-0 left-0 z-50 w-full transition-all duration-300 ${
@@ -42,13 +57,33 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-10">
+          <div className="hidden md:flex space-x-10 justify-center">
             <button onClick={() => scrollToSection('home')} className="nav-link">
               Home
             </button>
-            <button onClick={() => scrollToSection('services')} className="nav-link">
-              Services
-            </button>
+            <NavigationMenu>
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger onClick={(e) => e.preventDefault()} className="nav-link bg-transparent hover:bg-transparent focus:bg-transparent">
+                    Services <ChevronDown className="h-4 w-4 inline ml-1" />
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <ul className="grid w-[200px] gap-2 p-4">
+                      {serviceItems.map((service) => (
+                        <li key={service.id}>
+                          <button
+                            onClick={() => scrollToSection('services')}
+                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground text-left w-full"
+                          >
+                            {service.name}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
             <button onClick={() => scrollToSection('gallery')} className="nav-link">
               Gallery
             </button>
@@ -76,9 +111,22 @@ const Navbar = () => {
               <button onClick={() => scrollToSection('home')} className="nav-link">
                 Home
               </button>
-              <button onClick={() => scrollToSection('services')} className="nav-link">
-                Services
-              </button>
+              <div className="relative group">
+                <button className="nav-link flex items-center">
+                  Services <ChevronDown className="h-4 w-4 ml-1" />
+                </button>
+                <div className="absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-md py-2 z-10 hidden group-hover:block">
+                  {serviceItems.map((service) => (
+                    <button
+                      key={service.id}
+                      onClick={() => scrollToSection('services')}
+                      className="block w-full text-left px-4 py-2 text-sm text-salon-brown hover:bg-salon-cream"
+                    >
+                      {service.name}
+                    </button>
+                  ))}
+                </div>
+              </div>
               <button onClick={() => scrollToSection('gallery')} className="nav-link">
                 Gallery
               </button>

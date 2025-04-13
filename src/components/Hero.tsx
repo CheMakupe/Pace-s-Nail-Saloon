@@ -24,6 +24,13 @@ const Hero = () => {
       <div className="container mx-auto px-4 z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div className="text-center md:text-left opacity-0 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+            <div className="mb-6 max-w-md mx-auto md:mx-0">
+              <img
+                src="https://img.freepik.com/free-photo/top-view-nail-care-accessories-arrangement_23-2149096471.jpg"
+                alt="Nail accessories and tools"
+                className="w-full h-auto rounded-lg shadow-lg"
+              />
+            </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-salon-brown mb-4">
               The Ultimate <br />
               <span className="text-salon-dark-pink">Nail Destination</span>
@@ -44,13 +51,6 @@ const Hero = () => {
               <img 
                 src="/lovable-uploads/c17696ee-fba7-4dbf-8f03-44dcdc3953cb.png" 
                 alt="Beautiful nail design" 
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="absolute -bottom-5 -left-5 md:bottom-5 md:-left-10 w-40 h-40 rounded-full overflow-hidden border-4 border-white shadow-md animate-float">
-              <img 
-                src="/lovable-uploads/65248983-0eb5-4855-a92b-a878c0ca52f6.png" 
-                alt="Pink nail design" 
                 className="w-full h-full object-cover"
               />
             </div>
