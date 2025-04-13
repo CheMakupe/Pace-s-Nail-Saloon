@@ -1,6 +1,6 @@
 
 import { useEffect, useRef, useState } from 'react';
-import { Phone, Mail, MapPin, Calendar, Clock } from 'lucide-react';
+import { Phone, Mail, MapPin, Calendar, Clock, Send, MessageSquare } from 'lucide-react';
 import { toast } from "@/components/ui/use-toast";
 
 const Contact = () => {
@@ -22,20 +22,32 @@ const Contact = () => {
     e.preventDefault();
     console.log('Form submitted:', formData);
     
+    // Construct email body
+    const emailBody = `
+      Name: ${formData.name}
+      Email: ${formData.email}
+      Phone: ${formData.phone}
+      Service: ${formData.service}
+      Message: ${formData.message}
+    `;
+    
+    // Create mailto link
+    const mailtoLink = `mailto:pacesnailbar@gmail.com?subject=Booking Request from ${formData.name}&body=${encodeURIComponent(emailBody)}`;
+    
+    // Create WhatsApp link with message
+    const whatsappMessage = `Hello Paces Nailbar, I'd like to book an appointment.\n\nName: ${formData.name}\nService: ${formData.service}\nMessage: ${formData.message}`;
+    const whatsappLink = `https://wa.me/26599726866?text=${encodeURIComponent(whatsappMessage)}`;
+    
     // Show success message
     toast({
-      title: "Booking Request Sent",
-      description: "We'll contact you soon to confirm your appointment.",
+      title: "Booking Request Received",
+      description: "Please choose how you'd like to send this booking request",
     });
     
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      service: '',
-      message: ''
-    });
+    // Show options for sending
+    document.getElementById('contact-options')?.classList.remove('hidden');
+    document.getElementById('email-link')?.setAttribute('href', mailtoLink);
+    document.getElementById('whatsapp-link')?.setAttribute('href', whatsappLink);
   };
 
   useEffect(() => {
@@ -75,67 +87,14 @@ const Contact = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="max-w-2xl mx-auto">
           <div className="bg-white rounded-2xl p-8 shadow-lg opacity-0" style={{ 
-              animationName: 'slide-in-left', 
+              animationName: 'scale-in', 
               animationDuration: '0.7s', 
               animationFillMode: 'forwards',
               animationTimingFunction: 'ease-out' 
             }}>
-            <h3 className="text-2xl font-playfair text-salon-brown mb-6">Contact Information</h3>
-            
-            <div className="space-y-6">
-              <div className="flex items-center">
-                <div className="bg-salon-peach p-3 rounded-full mr-4">
-                  <Phone className="h-5 w-5 text-salon-brown" />
-                </div>
-                <div>
-                  <p className="font-medium text-salon-brown">Phone</p>
-                  <p className="text-salon-light-brown">+26599 726 8668</p>
-                  <p className="text-salon-light-brown">+26588 949 7951</p>
-                </div>
-              </div>
-              
-              <div className="flex items-center">
-                <div className="bg-salon-peach p-3 rounded-full mr-4">
-                  <Mail className="h-5 w-5 text-salon-brown" />
-                </div>
-                <div>
-                  <p className="font-medium text-salon-brown">Email</p>
-                  <p className="text-salon-light-brown">pacesnailbar@gmail.com</p>
-                </div>
-              </div>
-              
-              <div className="flex items-center">
-                <div className="bg-salon-peach p-3 rounded-full mr-4">
-                  <MapPin className="h-5 w-5 text-salon-brown" />
-                </div>
-                <div>
-                  <p className="font-medium text-salon-brown">Location</p>
-                  <p className="text-salon-light-brown">Visit our cozy salon in the heart of the city.</p>
-                </div>
-              </div>
-              
-              <div className="flex items-center">
-                <div className="bg-salon-peach p-3 rounded-full mr-4">
-                  <Clock className="h-5 w-5 text-salon-brown" />
-                </div>
-                <div>
-                  <p className="font-medium text-salon-brown">Working Hours</p>
-                  <p className="text-salon-light-brown">Monday to Saturday: 9:00 AM - 7:00 PM</p>
-                  <p className="text-salon-light-brown">Sunday: 10:00 AM - 5:00 PM</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div className="bg-white rounded-2xl p-8 shadow-lg opacity-0" style={{ 
-              animationName: 'slide-in-right', 
-              animationDuration: '0.7s', 
-              animationFillMode: 'forwards',
-              animationTimingFunction: 'ease-out' 
-            }}>
-            <h3 className="text-2xl font-playfair text-salon-brown mb-6">
+            <h3 className="text-2xl font-playfair text-salon-brown mb-6 text-center">
               <Calendar className="inline-block mr-2 mb-1" size={24} />
               Request an Appointment
             </h3>
@@ -233,6 +192,86 @@ const Contact = () => {
                 Request Booking
               </button>
             </form>
+            
+            <div id="contact-options" className="hidden mt-6 pt-6 border-t border-salon-peach">
+              <p className="text-center text-salon-brown mb-4">Send your booking request via:</p>
+              <div className="flex justify-center space-x-4">
+                <a 
+                  id="email-link" 
+                  href="#" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="flex items-center px-4 py-2 bg-salon-brown text-white rounded-md hover:bg-salon-light-brown transition-colors"
+                >
+                  <Mail className="mr-2" size={18} />
+                  Email
+                </a>
+                <a 
+                  id="whatsapp-link" 
+                  href="#" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="flex items-center px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors"
+                >
+                  <MessageSquare className="mr-2" size={18} />
+                  WhatsApp
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <div className="mt-10 bg-white rounded-2xl p-8 shadow-lg opacity-0" style={{ 
+              animationName: 'fade-in', 
+              animationDuration: '0.7s', 
+              animationFillMode: 'forwards',
+              animationDelay: '0.3s',
+              animationTimingFunction: 'ease-out' 
+            }}>
+            <h3 className="text-2xl font-playfair text-salon-brown mb-6 text-center">Contact Information</h3>
+            
+            <div className="space-y-6">
+              <div className="flex items-center justify-center">
+                <div className="bg-salon-peach p-3 rounded-full mr-4">
+                  <Phone className="h-5 w-5 text-salon-brown" />
+                </div>
+                <div>
+                  <p className="font-medium text-salon-brown">Phone</p>
+                  <p className="text-salon-light-brown">+26599 726 8668</p>
+                  <p className="text-salon-light-brown">+26588 949 7951</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center justify-center">
+                <div className="bg-salon-peach p-3 rounded-full mr-4">
+                  <Mail className="h-5 w-5 text-salon-brown" />
+                </div>
+                <div>
+                  <p className="font-medium text-salon-brown">Email</p>
+                  <p className="text-salon-light-brown">pacesnailbar@gmail.com</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center justify-center">
+                <div className="bg-salon-peach p-3 rounded-full mr-4">
+                  <MapPin className="h-5 w-5 text-salon-brown" />
+                </div>
+                <div>
+                  <p className="font-medium text-salon-brown">Location</p>
+                  <p className="text-salon-light-brown">Visit our cozy salon in the heart of the city.</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center justify-center">
+                <div className="bg-salon-peach p-3 rounded-full mr-4">
+                  <Clock className="h-5 w-5 text-salon-brown" />
+                </div>
+                <div>
+                  <p className="font-medium text-salon-brown">Working Hours</p>
+                  <p className="text-salon-light-brown">Monday to Saturday: 9:00 AM - 7:00 PM</p>
+                  <p className="text-salon-light-brown">Sunday: 10:00 AM - 5:00 PM</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

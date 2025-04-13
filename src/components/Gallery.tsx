@@ -15,6 +15,8 @@ const Gallery = () => {
     '/lovable-uploads/e626414b-5ac7-4446-8e7e-4631b709714a.png',
     '/lovable-uploads/15066012-516b-4bc5-8ce1-d170cc3983cb.png',
     '/lovable-uploads/7d0233ee-21e2-4d10-9d1f-2429ab3fe4dc.png',
+    '/lovable-uploads/269f55e4-f0ff-4f8c-8e93-e970b9f057d7.png',
+    '/lovable-uploads/375c9182-64a6-45cb-8994-5caf47e38a34.png',
   ];
 
   const nextSlide = () => {
@@ -124,7 +126,7 @@ const Gallery = () => {
         </div>
 
         {/* Thumbnails */}
-        <div className="grid grid-cols-4 sm:grid-cols-8 gap-2 mt-8 max-w-4xl mx-auto opacity-0" style={{ 
+        <div className="grid grid-cols-4 sm:grid-cols-5 gap-2 mt-8 max-w-4xl mx-auto opacity-0" style={{ 
             animationName: 'fade-in', 
             animationDuration: '0.7s', 
             animationFillMode: 'forwards',

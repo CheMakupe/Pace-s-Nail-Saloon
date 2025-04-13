@@ -34,15 +34,15 @@ const Navbar = () => {
       }`}
     >
       <div className="container mx-auto px-4 md:px-6">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center">
+        <div className="flex items-center justify-center">
+          <div className="md:absolute md:left-4">
             <span className="text-2xl font-playfair font-bold text-salon-brown">
               Paces <span className="text-salon-dark-pink">Nailbar</span>
             </span>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex space-x-10">
             <button onClick={() => scrollToSection('home')} className="nav-link">
               Home
             </button>
@@ -62,7 +62,7 @@ const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-salon-brown focus:outline-none"
+            className="md:hidden absolute right-4 text-salon-brown focus:outline-none"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -72,7 +72,7 @@ const Navbar = () => {
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
           <div className="md:hidden mt-4 pb-4 animate-fade-in-fast">
-            <div className="flex flex-col space-y-3">
+            <div className="flex flex-col space-y-3 items-center">
               <button onClick={() => scrollToSection('home')} className="nav-link">
                 Home
               </button>

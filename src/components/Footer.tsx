@@ -1,5 +1,5 @@
 
-import { Facebook, Instagram, Twitter, Heart, Copyright } from 'lucide-react';
+import { Facebook, Instagram, Twitter, Heart, Copyright, MessageSquare } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -15,14 +15,17 @@ const Footer = () => {
               delivering exceptional nail care services with passion and precision.
             </p>
             <div className="flex space-x-4 justify-center md:justify-start">
-              <a href="#" className="hover:text-salon-cream transition-colors">
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-salon-cream transition-colors">
                 <Facebook size={20} />
               </a>
-              <a href="#" className="hover:text-salon-cream transition-colors">
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-salon-cream transition-colors">
                 <Instagram size={20} />
               </a>
-              <a href="#" className="hover:text-salon-cream transition-colors">
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-salon-cream transition-colors">
                 <Twitter size={20} />
+              </a>
+              <a href="https://wa.me/26599726866" target="_blank" rel="noopener noreferrer" className="hover:text-salon-cream transition-colors">
+                <MessageSquare size={20} />
               </a>
             </div>
           </div>
@@ -62,17 +65,15 @@ const Footer = () => {
           </div>
         </div>
         
-        <div className="border-t border-white/20 pt-6 text-center">
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            <p className="flex items-center text-white/80 mb-4 md:mb-0">
-              <Copyright size={16} className="mr-1" />
-              {currentYear} Paces Nailbar. All Rights Reserved.
-            </p>
-            
-            <p className="flex items-center text-white/80">
-              Designed with <Heart size={16} className="mx-1 text-salon-peach animate-pulse" /> by Eng. P.Makupe
-            </p>
-          </div>
+        <div className="border-t border-white/20 pt-6 flex flex-col items-center">
+          <p className="flex items-center text-white/80 mb-4">
+            <Copyright size={16} className="mr-1" />
+            {currentYear} Paces Nailbar. All Rights Reserved.
+          </p>
+          
+          <p className="flex items-center text-white/80">
+            Designed with <Heart size={16} className="mx-1 text-salon-peach animate-pulse" /> by Eng. P. D. Makupe
+          </p>
         </div>
       </div>
     </footer>

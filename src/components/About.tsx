@@ -66,6 +66,19 @@ const About = () => {
                 className="w-full h-full object-cover"
               />
             </div>
+            <div className="mt-8 rounded-2xl overflow-hidden shadow-lg opacity-0" style={{ 
+                animationName: 'fade-in', 
+                animationDuration: '0.7s', 
+                animationFillMode: 'forwards',
+                animationDelay: '0.6s',
+                animationTimingFunction: 'ease-out' 
+              }}>
+              <img 
+                src="/lovable-uploads/abb3a452-1e1a-47e1-8144-19dda92d9565.png" 
+                alt="Nail technician working on customer's feet" 
+                className="w-full h-auto"
+              />
+            </div>
           </div>
           
           <div className="opacity-0" style={{ 
