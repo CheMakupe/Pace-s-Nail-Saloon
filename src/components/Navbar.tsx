@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown, Home, Grid, Image, Info, Phone } from 'lucide-react';
 import { 
   NavigationMenu,
   NavigationMenuContent,
@@ -49,26 +49,28 @@ const Navbar = () => {
       }`}
     >
       <div className="container mx-auto px-4 md:px-6">
-        <div className="flex items-center justify-center">
-          <div className="md:absolute md:left-4">
-            <span className="text-2xl font-playfair font-bold text-salon-brown">
+        <div className="flex items-center justify-between md:justify-center">
+          <div className="text-2xl font-playfair font-bold text-salon-brown md:absolute md:left-4">
+            <span>
               Paces <span className="text-salon-dark-pink">Nailbar</span>
             </span>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-10 justify-center">
-            <button onClick={() => scrollToSection('home')} className="nav-link">
-              Home
+            <button onClick={() => scrollToSection('home')} className="nav-link flex flex-col items-center">
+              <Home size={18} className="mb-1" />
+              <span>Home</span>
             </button>
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger onClick={(e) => e.preventDefault()} className="nav-link bg-transparent hover:bg-transparent focus:bg-transparent">
-                    Services <ChevronDown className="h-4 w-4 inline ml-1" />
+                  <NavigationMenuTrigger onClick={(e) => e.preventDefault()} className="nav-link bg-transparent hover:bg-transparent focus:bg-transparent flex flex-col items-center">
+                    <Grid size={18} className="mb-1" />
+                    <span>Services</span>
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="grid w-[200px] gap-2 p-4">
+                    <ul className="grid w-[200px] gap-2 p-4 bg-white">
                       {serviceItems.map((service) => (
                         <li key={service.id}>
                           <button
@@ -84,20 +86,23 @@ const Navbar = () => {
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
-            <button onClick={() => scrollToSection('gallery')} className="nav-link">
-              Gallery
+            <button onClick={() => scrollToSection('gallery')} className="nav-link flex flex-col items-center">
+              <Image size={18} className="mb-1" />
+              <span>Gallery</span>
             </button>
-            <button onClick={() => scrollToSection('about')} className="nav-link">
-              About
+            <button onClick={() => scrollToSection('about')} className="nav-link flex flex-col items-center">
+              <Info size={18} className="mb-1" />
+              <span>About</span>
             </button>
-            <button onClick={() => scrollToSection('contact')} className="nav-link">
-              Contact
+            <button onClick={() => scrollToSection('contact')} className="nav-link flex flex-col items-center">
+              <Phone size={18} className="mb-1" />
+              <span>Contact</span>
             </button>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden absolute right-4 text-salon-brown focus:outline-none"
+            className="md:hidden text-salon-brown focus:outline-none"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -108,12 +113,15 @@ const Navbar = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden mt-4 pb-4 animate-fade-in-fast">
             <div className="flex flex-col space-y-3 items-center">
-              <button onClick={() => scrollToSection('home')} className="nav-link">
-                Home
+              <button onClick={() => scrollToSection('home')} className="nav-link flex items-center">
+                <Home size={18} className="mr-2" />
+                <span>Home</span>
               </button>
               <div className="relative group">
                 <button className="nav-link flex items-center">
-                  Services <ChevronDown className="h-4 w-4 ml-1" />
+                  <Grid size={18} className="mr-2" />
+                  <span>Services</span>
+                  <ChevronDown className="h-4 w-4 ml-1" />
                 </button>
                 <div className="absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-md py-2 z-10 hidden group-hover:block">
                   {serviceItems.map((service) => (
@@ -127,14 +135,17 @@ const Navbar = () => {
                   ))}
                 </div>
               </div>
-              <button onClick={() => scrollToSection('gallery')} className="nav-link">
-                Gallery
+              <button onClick={() => scrollToSection('gallery')} className="nav-link flex items-center">
+                <Image size={18} className="mr-2" />
+                <span>Gallery</span>
               </button>
-              <button onClick={() => scrollToSection('about')} className="nav-link">
-                About
+              <button onClick={() => scrollToSection('about')} className="nav-link flex items-center">
+                <Info size={18} className="mr-2" />
+                <span>About</span>
               </button>
-              <button onClick={() => scrollToSection('contact')} className="nav-link">
-                Contact
+              <button onClick={() => scrollToSection('contact')} className="nav-link flex items-center">
+                <Phone size={18} className="mr-2" />
+                <span>Contact</span>
               </button>
             </div>
           </div>

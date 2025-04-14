@@ -39,48 +39,7 @@ const About = () => {
           <div className="w-20 h-1 bg-salon-dark-pink mx-auto mb-6"></div>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div className="relative">
-            <div className="rounded-2xl overflow-hidden shadow-xl opacity-0" style={{ 
-                animationName: 'slide-in-left', 
-                animationDuration: '0.7s', 
-                animationFillMode: 'forwards',
-                animationTimingFunction: 'ease-out' 
-              }}>
-              <img 
-                src="/lovable-uploads/269f55e4-f0ff-4f8c-8e93-e970b9f057d7.png" 
-                alt="Paces Nailbar Brochure" 
-                className="w-full h-auto"
-              />
-            </div>
-            <div className="absolute -bottom-5 -right-5 w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg opacity-0" style={{ 
-                animationName: 'scale-in', 
-                animationDuration: '0.7s', 
-                animationFillMode: 'forwards',
-                animationDelay: '0.4s',
-                animationTimingFunction: 'ease-out' 
-              }}>
-              <img 
-                src="/lovable-uploads/375c9182-64a6-45cb-8994-5caf47e38a34.png" 
-                alt="Nail design" 
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="mt-8 rounded-2xl overflow-hidden shadow-lg opacity-0" style={{ 
-                animationName: 'fade-in', 
-                animationDuration: '0.7s', 
-                animationFillMode: 'forwards',
-                animationDelay: '0.6s',
-                animationTimingFunction: 'ease-out' 
-              }}>
-              <img 
-                src="/lovable-uploads/abb3a452-1e1a-47e1-8144-19dda92d9565.png" 
-                alt="Nail technician working on customer's feet" 
-                className="w-full h-auto"
-              />
-            </div>
-          </div>
-          
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">          
           <div className="opacity-0" style={{ 
               animationName: 'fade-in', 
               animationDuration: '0.7s', 
@@ -119,6 +78,34 @@ const About = () => {
                 <h4 className="font-semibold text-salon-brown">Creativity</h4>
                 <p className="text-sm text-salon-light-brown">Unique designs</p>
               </div>
+            </div>
+          </div>
+          
+          <div className="relative">
+            <div className="rounded-2xl overflow-hidden shadow-xl opacity-0" style={{ 
+                animationName: 'slide-in-right', 
+                animationDuration: '0.7s', 
+                animationFillMode: 'forwards',
+                animationTimingFunction: 'ease-out' 
+              }}>
+              <img 
+                src="/lovable-uploads/e9f1b713-25e4-4e89-9c66-d716bc830158.png" 
+                alt="Beautiful french tip nails" 
+                className="w-full h-auto"
+              />
+            </div>
+            <div className="absolute -bottom-5 -right-5 w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg opacity-0" style={{ 
+                animationName: 'scale-in', 
+                animationDuration: '0.7s', 
+                animationFillMode: 'forwards',
+                animationDelay: '0.4s',
+                animationTimingFunction: 'ease-out' 
+              }}>
+              <img 
+                src="/lovable-uploads/375c9182-64a6-45cb-8994-5caf47e38a34.png" 
+                alt="Nail design" 
+                className="w-full h-full object-cover"
+              />
             </div>
           </div>
         </div>

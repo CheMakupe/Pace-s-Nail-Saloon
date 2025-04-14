@@ -66,12 +66,12 @@ const Footer = () => {
         </div>
         
         <div className="border-t border-white/20 pt-6 flex flex-col items-center">
-          <p className="flex items-center justify-center text-white/80 mb-2">
+          <p className="flex items-center justify-center text-white/80 mb-2 text-center">
             <Copyright size={16} className="mr-1" />
             {currentYear} Paces Nailbar. All Rights Reserved.
           </p>
           
-          <p className="flex items-center justify-center text-white/80">
+          <p className="flex items-center justify-center text-white/80 text-center">
             Designed with <Heart size={16} className="mx-1 text-salon-peach animate-pulse" /> by Eng. P. D. Makupe
           </p>
         </div>

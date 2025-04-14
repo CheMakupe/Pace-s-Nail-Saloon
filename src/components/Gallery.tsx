@@ -7,6 +7,7 @@ const Gallery = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const galleryImages = [
+    '/lovable-uploads/e9f1b713-25e4-4e89-9c66-d716bc830158.png', // New image
     '/lovable-uploads/c17696ee-fba7-4dbf-8f03-44dcdc3953cb.png',
     '/lovable-uploads/65248983-0eb5-4855-a92b-a878c0ca52f6.png',
     '/lovable-uploads/abb3a452-1e1a-47e1-8144-19dda92d9565.png',
@@ -15,7 +16,6 @@ const Gallery = () => {
     '/lovable-uploads/e626414b-5ac7-4446-8e7e-4631b709714a.png',
     '/lovable-uploads/15066012-516b-4bc5-8ce1-d170cc3983cb.png',
     '/lovable-uploads/7d0233ee-21e2-4d10-9d1f-2429ab3fe4dc.png',
-    '/lovable-uploads/269f55e4-f0ff-4f8c-8e93-e970b9f057d7.png',
     '/lovable-uploads/375c9182-64a6-45cb-8994-5caf47e38a34.png',
   ];
 
