@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Menu, X, ChevronDown, Home, Grid, Image, Info, Phone } from 'lucide-react';
+import { Menu, X, ChevronDown, Home, Scissors, Image, Info, Phone } from 'lucide-react';
 import { 
   NavigationMenu,
   NavigationMenuContent,
@@ -66,7 +66,7 @@ const Navbar = () => {
               <NavigationMenuList>
                 <NavigationMenuItem>
                   <NavigationMenuTrigger onClick={(e) => e.preventDefault()} className="nav-link bg-transparent hover:bg-transparent focus:bg-transparent flex flex-col items-center">
-                    <Grid size={18} className="mb-1" />
+                    <Scissors size={18} className="mb-1" />
                     <span>Services</span>
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
@@ -119,7 +119,7 @@ const Navbar = () => {
               </button>
               <div className="relative group">
                 <button className="nav-link flex items-center">
-                  <Grid size={18} className="mr-2" />
+                  <Scissors size={18} className="mr-2" />
                   <span>Services</span>
                   <ChevronDown className="h-4 w-4 ml-1" />
                 </button>

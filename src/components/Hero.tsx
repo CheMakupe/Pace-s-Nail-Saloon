@@ -46,6 +46,8 @@ const Hero = () => {
                 alt="Beautiful french tip nails" 
                 className="w-full h-full object-cover"
               />
+              {/* Small circle accent */}
+              <div className="absolute -right-4 top-1/3 w-16 h-16 bg-salon-dark-pink rounded-full border-4 border-white shadow-md"></div>
             </div>
           </div>
         </div>

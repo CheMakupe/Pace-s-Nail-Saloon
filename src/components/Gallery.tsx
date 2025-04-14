@@ -7,7 +7,7 @@ const Gallery = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const galleryImages = [
-    '/lovable-uploads/e9f1b713-25e4-4e89-9c66-d716bc830158.png', // New image
+    '/lovable-uploads/e9f1b713-25e4-4e89-9c66-d716bc830158.png',
     '/lovable-uploads/c17696ee-fba7-4dbf-8f03-44dcdc3953cb.png',
     '/lovable-uploads/65248983-0eb5-4855-a92b-a878c0ca52f6.png',
     '/lovable-uploads/abb3a452-1e1a-47e1-8144-19dda92d9565.png',
@@ -85,7 +85,7 @@ const Gallery = () => {
                 >
                   <img
                     src={image}
-                    alt={`Nail design ${index + 1}`}
+                    alt={`Design ${index + 1}`}
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -141,11 +141,16 @@ const Gallery = () => {
                 index === activeIndex ? 'border-salon-brown scale-105' : 'border-transparent'
               }`}
             >
-              <img
-                src={image}
-                alt={`Thumbnail ${index + 1}`}
-                className="aspect-square object-cover w-full"
-              />
+              <div className="aspect-square relative">
+                <img
+                  src={image}
+                  alt={`${index + 1}`}
+                  className="object-cover w-full h-full"
+                />
+                <div className="absolute inset-0 flex items-center justify-center bg-black/40 text-white font-bold text-lg">
+                  {index + 1}
+                </div>
+              </div>
             </button>
           ))}
         </div>
