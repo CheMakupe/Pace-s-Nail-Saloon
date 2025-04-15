@@ -16,6 +16,11 @@ const Gallery = () => {
     '/lovable-uploads/15066012-516b-4bc5-8ce1-d170cc3983cb.png',
     '/lovable-uploads/7d0233ee-21e2-4d10-9d1f-2429ab3fe4dc.png',
     '/lovable-uploads/375c9182-64a6-45cb-8994-5caf47e38a34.png',
+    '/lovable-uploads/e6449296-82b2-4208-af7b-9050ffedc98b.png',
+    '/lovable-uploads/0b0777da-f609-4b08-a18e-af3e626fe8b1.png',
+    '/lovable-uploads/9780f7a2-c1be-4a0e-8cf7-6efb4c24915f.png',
+    '/lovable-uploads/3e1ce186-cb91-410d-b6f1-ff3f1dc9d850.png',
+    '/lovable-uploads/51da65d6-6fb1-40d6-ae71-4221210318de.png'
   ];
 
   const nextSlide = () => {
