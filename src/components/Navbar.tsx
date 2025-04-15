@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, ChevronDown, Sun, Moon, Home, Scissors, Image, Info, Phone } from 'lucide-react';
+import { Menu, X, ChevronDown, Sun, Moon, Home, Scissors, Image, Info, Phone, Settings } from 'lucide-react';
 import { 
   NavigationMenu,
   NavigationMenuContent,
@@ -42,8 +42,10 @@ const Navbar = () => {
   };
 
   const serviceItems = [
-    { name: "Manicure", id: "services-manicure" },
-    { name: "Pedicure", id: "services-pedicure" },
+    { name: "Manicure - Natural", price: "5k" },
+    { name: "Manicure - Artificial", price: "7k" },
+    { name: "Pedicure - Natural", price: "5k" },
+    { name: "Pedicure - Artificial", price: "6k" },
     { name: "Nail Extensions", id: "services-extensions" },
     { name: "Nail Art", id: "services-art" },
     { name: "Nail Repair", id: "services-repair" }
@@ -77,18 +79,18 @@ const Navbar = () => {
               <NavigationMenuList>
                 <NavigationMenuItem>
                   <NavigationMenuTrigger onClick={(e) => e.preventDefault()} className="nav-link bg-transparent hover:bg-transparent focus:bg-transparent flex flex-col items-center">
-                    <Scissors size={18} className="mb-1" />
+                    <Settings size={18} className="mb-1" />
                     <span>Services</span>
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <ul className="grid w-[200px] gap-2 p-4 bg-white">
                       {serviceItems.map((service) => (
-                        <li key={service.id}>
+                        <li key={service.name}>
                           <button
                             onClick={() => scrollToSection('services')}
                             className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground text-left w-full"
                           >
-                            {service.name}
+                            {service.name} {service.price && <span className="float-right font-semibold">{service.price}</span>}
                           </button>
                         </li>
                       ))}
@@ -128,18 +130,18 @@ const Navbar = () => {
               </button>
               <div className="relative group">
                 <button className="nav-link flex items-center">
-                  <Scissors size={18} className="mr-2" />
+                  <Settings size={18} className="mr-2" />
                   <span>Services</span>
                   <ChevronDown className="h-4 w-4 ml-1" />
                 </button>
                 <div className="absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-md py-2 z-10 hidden group-hover:block">
                   {serviceItems.map((service) => (
                     <button
-                      key={service.id}
+                      key={service.name}
                       onClick={() => scrollToSection('services')}
                       className="block w-full text-left px-4 py-2 text-sm text-salon-brown hover:bg-salon-cream"
                     >
-                      {service.name}
+                      {service.name} {service.price && <span className="float-right font-semibold">{service.price}</span>}
                     </button>
                   ))}
                 </div>

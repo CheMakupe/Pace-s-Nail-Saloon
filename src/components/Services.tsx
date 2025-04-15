@@ -5,34 +5,41 @@ import { Scissors, Droplet, PaintBucket, Palette } from 'lucide-react';
 interface Service {
   icon: React.ReactNode;
   title: string;
-  description: string;
-  price: string;
+  subServices: { name: string; price: string }[];
 }
 
 const services: Service[] = [
   {
     icon: <Scissors className="h-8 w-8 text-salon-brown" />,
     title: "Manicure",
-    description: "Professional nail care for your hands with cuticle treatment, shaping, and polish.",
-    price: "5k - 7k"
+    subServices: [
+      { name: "Natural Nails", price: "5k" },
+      { name: "Artificial Nails", price: "7k" }
+    ]
   },
   {
     icon: <Droplet className="h-8 w-8 text-salon-brown" />,
     title: "Pedicure",
-    description: "Luxurious foot treatment including exfoliation, massage, and perfectly polished toes.",
-    price: "5k - 6k"
+    subServices: [
+      { name: "Natural Nails", price: "5k" },
+      { name: "Artificial Nails", price: "6k" }
+    ]
   },
   {
     icon: <PaintBucket className="h-8 w-8 text-salon-brown" />,
     title: "Soak Off",
-    description: "Safe removal of gel polish or acrylics to maintain nail health.",
-    price: "2k - 3k"
+    subServices: [
+      { name: "Gel Polish Removal", price: "2k" },
+      { name: "Acrylic Removal", price: "3k" }
+    ]
   },
   {
     icon: <Palette className="h-8 w-8 text-salon-brown" />,
     title: "Extra Art",
-    description: "Custom nail art designs from simple accents to elaborate patterns.",
-    price: "2k"
+    subServices: [
+      { name: "Simple Design", price: "2k" },
+      { name: "Complex Design", price: "3k" }
+    ]
   }
 ];
 
@@ -95,12 +102,14 @@ const Services = () => {
                   {service.icon}
                 </div>
               </div>
-              <h3 className="service-card-title text-center">{service.title}</h3>
-              <p className="text-salon-light-brown mb-4 text-center">{service.description}</p>
-              <div className="text-center">
-                <span className="inline-block bg-salon-cream px-4 py-1 rounded-full text-salon-brown font-semibold">
-                  {service.price}
-                </span>
+              <h3 className="service-card-title text-center mb-4">{service.title}</h3>
+              <div className="space-y-2">
+                {service.subServices.map((subService, idx) => (
+                  <div key={idx} className="flex justify-between items-center px-4 py-2 bg-salon-cream rounded-lg">
+                    <span className="text-salon-brown">{subService.name}</span>
+                    <span className="font-semibold text-salon-dark-pink">{subService.price}</span>
+                  </div>
+                ))}
               </div>
             </div>
           ))}
