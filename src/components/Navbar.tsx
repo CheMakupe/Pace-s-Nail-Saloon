@@ -1,6 +1,5 @@
-
 import { useState, useEffect } from 'react';
-import { Menu, X, ChevronDown, Home, Scissors, Image, Info, Phone } from 'lucide-react';
+import { Menu, X, ChevronDown, Sun, Moon, Home, Scissors, Image, Info, Phone } from 'lucide-react';
 import { 
   NavigationMenu,
   NavigationMenuContent,
@@ -12,6 +11,14 @@ import {
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState<boolean>(() => {
+    return localStorage.getItem('theme') === 'dark';
+  });
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', darkMode);
+    localStorage.setItem('theme', darkMode ? 'dark' : 'light');
+  }, [darkMode]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,20 +50,24 @@ const Navbar = () => {
   ];
 
   return (
-    <nav
-      className={`fixed top-0 left-0 z-50 w-full transition-all duration-300 ${
-        isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'
-      }`}
-    >
+    <nav className={`fixed top-0 left-0 z-50 w-full transition-all duration-300 ${
+      isScrolled ? 'bg-white dark:bg-gray-900 shadow-md py-2' : 'bg-transparent py-4'
+    }`}>
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between md:justify-center">
-          <div className="text-2xl font-playfair font-bold text-salon-brown md:absolute md:left-4">
-            <span>
+          <div className="md:absolute md:left-4 flex items-center space-x-4">
+            <span className="text-2xl font-playfair font-bold text-salon-brown dark:text-white">
               Paces <span className="text-salon-dark-pink">Nailbar</span>
             </span>
+            <button
+              aria-label="Toggle dark mode"
+              onClick={() => setDarkMode(!darkMode)}
+              className="p-1 rounded focus:outline-none text-salon-brown dark:text-white"
+            >
+              {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
           </div>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-10 justify-center">
             <button onClick={() => scrollToSection('home')} className="nav-link flex flex-col items-center">
               <Home size={18} className="mb-1" />
@@ -100,7 +111,6 @@ const Navbar = () => {
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             className="md:hidden text-salon-brown focus:outline-none"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -109,7 +119,6 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile Navigation */}
         {isMobileMenuOpen && (
           <div className="md:hidden mt-4 pb-4 animate-fade-in-fast">
             <div className="flex flex-col space-y-3 items-center">

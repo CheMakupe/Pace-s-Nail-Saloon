@@ -42,6 +42,7 @@ const Hero = () => {
           <div className="relative opacity-0 animate-slide-in-right" style={{ animationDelay: '0.6s' }}>
             <div className="relative rounded-full overflow-hidden aspect-square max-w-md mx-auto border-8 border-white shadow-lg">
               <img 
+                loading="lazy"
                 src="/lovable-uploads/e9f1b713-25e4-4e89-9c66-d716bc830158.png" 
                 alt="Beautiful french tip nails" 
                 className="w-full h-full object-cover"

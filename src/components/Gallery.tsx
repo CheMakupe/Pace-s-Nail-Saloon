@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -72,7 +71,6 @@ const Gallery = () => {
           </p>
         </div>
 
-        {/* Carousel */}
         <div className="relative max-w-4xl mx-auto">
           <div className="overflow-hidden rounded-2xl shadow-xl">
             <div className="relative aspect-[4/3] md:aspect-[16/9]">
@@ -84,6 +82,7 @@ const Gallery = () => {
                   }`}
                 >
                   <img
+                    loading="lazy"
                     src={image}
                     alt={`Design ${index + 1}`}
                     className="w-full h-full object-cover"
@@ -93,7 +92,6 @@ const Gallery = () => {
             </div>
           </div>
 
-          {/* Navigation Buttons */}
           <button
             onClick={prevSlide}
             className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-salon-brown rounded-full p-2 shadow-md transition-all"
@@ -110,7 +108,6 @@ const Gallery = () => {
             <ChevronRight size={24} />
           </button>
 
-          {/* Indicators */}
           <div className="flex justify-center mt-4 space-x-2">
             {galleryImages.map((_, index) => (
               <button
@@ -125,7 +122,6 @@ const Gallery = () => {
           </div>
         </div>
 
-        {/* Thumbnails */}
         <div className="grid grid-cols-4 sm:grid-cols-5 gap-2 mt-8 max-w-4xl mx-auto opacity-0" style={{ 
             animationName: 'fade-in', 
             animationDuration: '0.7s', 
@@ -143,6 +139,7 @@ const Gallery = () => {
             >
               <div className="aspect-square relative">
                 <img
+                  loading="lazy"
                   src={image}
                   alt={`${index + 1}`}
                   className="object-cover w-full h-full"

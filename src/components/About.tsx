@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from 'react';
 import { Heart, Award, Sparkles } from 'lucide-react';
 
@@ -89,6 +88,7 @@ const About = () => {
                 animationTimingFunction: 'ease-out' 
               }}>
               <img 
+                loading="lazy"
                 src="/lovable-uploads/e9f1b713-25e4-4e89-9c66-d716bc830158.png" 
                 alt="Beautiful french tip nails" 
                 className="w-full h-auto"
@@ -102,6 +102,7 @@ const About = () => {
                 animationTimingFunction: 'ease-out' 
               }}>
               <img 
+                loading="lazy"
                 src="/lovable-uploads/375c9182-64a6-45cb-8994-5caf47e38a34.png" 
                 alt="Nail design" 
                 className="w-full h-full object-cover"
