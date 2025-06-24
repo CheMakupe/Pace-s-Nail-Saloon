@@ -1,6 +1,6 @@
 
 import { useEffect, useRef } from 'react';
-import { Scissors, Droplet, PaintBucket, Palette } from 'lucide-react';
+import { Scissors, Droplet, PaintBucket, Palette, Settings } from 'lucide-react';
 import ServicesList from './ServicesList';
 import { Service } from '@/types/service';
 
@@ -72,6 +72,11 @@ const Services = () => {
       
       <div ref={sectionRef} className="container mx-auto page-section">
         <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="flex justify-center mb-4">
+            <div className="p-4 bg-salon-peach rounded-full">
+              <Settings className="h-12 w-12 text-salon-brown" />
+            </div>
+          </div>
           <h2 className="text-3xl md:text-4xl font-playfair text-salon-brown mb-4">Our Services</h2>
           <div className="w-20 h-1 bg-salon-dark-pink mx-auto mb-6"></div>
           <p className="text-salon-light-brown">

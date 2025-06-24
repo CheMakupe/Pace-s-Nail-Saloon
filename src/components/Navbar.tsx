@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown, Sun, Moon, Home, Scissors, Image, Info, Phone, Settings } from 'lucide-react';
 import { 
@@ -41,14 +42,30 @@ const Navbar = () => {
     setIsMobileMenuOpen(false);
   };
 
-  const serviceItems = [
-    { name: "Manicure - Natural", price: "5k" },
-    { name: "Manicure - Artificial", price: "7k" },
-    { name: "Pedicure - Natural", price: "5k" },
-    { name: "Pedicure - Artificial", price: "6k" },
-    { name: "Nail Extensions", id: "services-extensions" },
-    { name: "Nail Art", id: "services-art" },
-    { name: "Nail Repair", id: "services-repair" }
+  const serviceCategories = [
+    {
+      category: "Manicure",
+      services: [
+        { name: "Natural Nails", price: "5k" },
+        { name: "Artificial Nails", price: "7k" }
+      ]
+    },
+    {
+      category: "Pedicure", 
+      services: [
+        { name: "Natural Nails", price: "5k" },
+        { name: "Artificial Nails", price: "6k" }
+      ]
+    },
+    {
+      category: "Additional Services",
+      services: [
+        { name: "Gel Polish Removal", price: "2k" },
+        { name: "Acrylic Removal", price: "3k" },
+        { name: "Simple Design", price: "2k" },
+        { name: "Complex Design", price: "3k" }
+      ]
+    }
   ];
 
   return (
@@ -83,18 +100,28 @@ const Navbar = () => {
                     <span>Services</span>
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="grid w-[200px] gap-2 p-4 bg-white">
-                      {serviceItems.map((service) => (
-                        <li key={service.name}>
-                          <button
-                            onClick={() => scrollToSection('services')}
-                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground text-left w-full"
-                          >
-                            {service.name} {service.price && <span className="float-right font-semibold">{service.price}</span>}
-                          </button>
-                        </li>
+                    <div className="w-[300px] p-4 bg-white dark:bg-gray-800 shadow-lg">
+                      {serviceCategories.map((category, idx) => (
+                        <div key={idx} className="mb-4 last:mb-0">
+                          <h4 className="font-semibold text-salon-brown dark:text-white mb-2 px-2">{category.category}</h4>
+                          <ul className="space-y-1">
+                            {category.services.map((service, serviceIdx) => (
+                              <li key={serviceIdx}>
+                                <button
+                                  onClick={() => scrollToSection('services')}
+                                  className="block w-full text-left px-3 py-2 rounded-md hover:bg-salon-cream dark:hover:bg-gray-700 transition-colors"
+                                >
+                                  <div className="flex justify-between items-center">
+                                    <span className="text-salon-brown dark:text-gray-300">{service.name}</span>
+                                    <span className="font-semibold text-salon-dark-pink">{service.price}</span>
+                                  </div>
+                                </button>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
               </NavigationMenuList>
@@ -134,15 +161,20 @@ const Navbar = () => {
                   <span>Services</span>
                   <ChevronDown className="h-4 w-4 ml-1" />
                 </button>
-                <div className="absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-md py-2 z-10 hidden group-hover:block">
-                  {serviceItems.map((service) => (
-                    <button
-                      key={service.name}
-                      onClick={() => scrollToSection('services')}
-                      className="block w-full text-left px-4 py-2 text-sm text-salon-brown hover:bg-salon-cream"
-                    >
-                      {service.name} {service.price && <span className="float-right font-semibold">{service.price}</span>}
-                    </button>
+                <div className="absolute left-0 mt-2 w-64 bg-white shadow-lg rounded-md py-2 z-10 hidden group-hover:block">
+                  {serviceCategories.map((category, idx) => (
+                    <div key={idx} className="px-4 py-2">
+                      <h4 className="font-semibold text-salon-brown mb-1">{category.category}</h4>
+                      {category.services.map((service, serviceIdx) => (
+                        <button
+                          key={serviceIdx}
+                          onClick={() => scrollToSection('services')}
+                          className="block w-full text-left px-2 py-1 text-sm text-salon-light-brown hover:bg-salon-cream rounded"
+                        >
+                          {service.name} <span className="float-right font-semibold text-salon-dark-pink">{service.price}</span>
+                        </button>
+                      ))}
+                    </div>
                   ))}
                 </div>
               </div>
