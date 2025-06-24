@@ -1,53 +1,132 @@
-
 import { useEffect, useRef, useState } from 'react';
 import { Phone, Mail, MapPin, Calendar, Clock, MessageSquare } from 'lucide-react';
 import { toast } from "@/components/ui/use-toast";
 
+interface FormData {
+  name: string;
+  email: string;
+  phone: string;
+  service: string;
+  message: string;
+  preferredDate?: string;
+  preferredTime?: string;
+}
+
 const Contact = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
     phone: '',
     service: '',
-    message: ''
+    message: '',
+    preferredDate: '',
+    preferredTime: ''
   });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const validateForm = (): boolean => {
+    if (!formData.name.trim()) {
+      toast({
+        title: "Error",
+        description: "Please enter your name",
+        variant: "destructive"
+      });
+      return false;
+    }
+    
+    if (!formData.email.trim() || !formData.email.includes('@')) {
+      toast({
+        title: "Error", 
+        description: "Please enter a valid email address",
+        variant: "destructive"
+      });
+      return false;
+    }
+    
+    if (!formData.phone.trim()) {
+      toast({
+        title: "Error",
+        description: "Please enter your phone number",
+        variant: "destructive"
+      });
+      return false;
+    }
+    
+    if (!formData.service) {
+      toast({
+        title: "Error",
+        description: "Please select a service",
+        variant: "destructive"
+      });
+      return false;
+    }
+    
+    return true;
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
     
-    // Construct email body
-    const emailBody = `
-      Name: ${formData.name}
-      Email: ${formData.email}
-      Phone: ${formData.phone}
-      Service: ${formData.service}
-      Message: ${formData.message}
-    `;
+    if (!validateForm()) return;
     
-    // Create mailto link
-    const mailtoLink = `mailto:pacesnailbar@gmail.com?subject=Booking Request from ${formData.name}&body=${encodeURIComponent(emailBody)}`;
+    setIsSubmitting(true);
     
-    // Create WhatsApp link with message
-    const whatsappMessage = `Hello Paces Nailbar, I'd like to book an appointment.\n\nName: ${formData.name}\nService: ${formData.service}\nMessage: ${formData.message}`;
-    const whatsappLink = `https://wa.me/26599726866?text=${encodeURIComponent(whatsappMessage)}`;
-    
-    // Show success message
-    toast({
-      title: "Booking Request Received",
-      description: "Please choose how you'd like to send this booking request",
-    });
-    
-    // Show options for sending
-    document.getElementById('contact-options')?.classList.remove('hidden');
-    document.getElementById('email-link')?.setAttribute('href', mailtoLink);
-    document.getElementById('whatsapp-link')?.setAttribute('href', whatsappLink);
+    try {
+      // Prepare data for database submission
+      const bookingData = {
+        ...formData,
+        submittedAt: new Date().toISOString(),
+        status: 'pending'
+      };
+      
+      console.log('Booking data ready for database:', bookingData);
+      
+      // Construct email body
+      const emailBody = `
+        Name: ${formData.name}
+        Email: ${formData.email}
+        Phone: ${formData.phone}
+        Service: ${formData.service}
+        Preferred Date: ${formData.preferredDate || 'Not specified'}
+        Preferred Time: ${formData.preferredTime || 'Not specified'}
+        Message: ${formData.message}
+      `;
+      
+      // Create mailto link
+      const mailtoLink = `mailto:pacesnailbar@gmail.com?subject=Booking Request from ${formData.name}&body=${encodeURIComponent(emailBody)}`;
+      
+      // Create WhatsApp link with message
+      const whatsappMessage = `Hello Paces Nailbar, I'd like to book an appointment.\n\nName: ${formData.name}\nService: ${formData.service}\nPreferred Date: ${formData.preferredDate || 'Not specified'}\nPreferred Time: ${formData.preferredTime || 'Not specified'}\nMessage: ${formData.message}`;
+      const whatsappLink = `https://wa.me/26599726866?text=${encodeURIComponent(whatsappMessage)}`;
+      
+      // Show success message
+      toast({
+        title: "Booking Request Received",
+        description: "Please choose how you'd like to send this booking request",
+      });
+      
+      // Show options for sending
+      document.getElementById('contact-options')?.classList.remove('hidden');
+      document.getElementById('email-link')?.setAttribute('href', mailtoLink);
+      document.getElementById('whatsapp-link')?.setAttribute('href', whatsappLink);
+      
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast({
+        title: "Error",
+        description: "There was an error processing your request. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   useEffect(() => {
@@ -104,7 +183,7 @@ const Contact = () => {
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-salon-brown mb-1">
-                    Your Name
+                    Your Name *
                   </label>
                   <input
                     type="text"
@@ -121,7 +200,7 @@ const Contact = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-salon-brown mb-1">
-                      Email
+                      Email *
                     </label>
                     <input
                       type="email"
@@ -137,7 +216,7 @@ const Contact = () => {
                   
                   <div>
                     <label htmlFor="phone" className="block text-sm font-medium text-salon-brown mb-1">
-                      Phone
+                      Phone *
                     </label>
                     <input
                       type="tel"
@@ -154,7 +233,7 @@ const Contact = () => {
                 
                 <div>
                   <label htmlFor="service" className="block text-sm font-medium text-salon-brown mb-1">
-                    Service
+                    Service *
                   </label>
                   <select
                     id="service"
@@ -165,11 +244,45 @@ const Contact = () => {
                     className="w-full px-4 py-2 border border-salon-peach rounded-md focus:outline-none focus:ring-2 focus:ring-salon-dark-pink bg-white"
                   >
                     <option value="">Select a service</option>
-                    <option value="manicure">Manicure</option>
-                    <option value="pedicure">Pedicure</option>
-                    <option value="soak-off">Soak Off</option>
-                    <option value="nail-art">Nail Art</option>
+                    <option value="manicure-natural">Manicure - Natural Nails (5k)</option>
+                    <option value="manicure-artificial">Manicure - Artificial Nails (7k)</option>
+                    <option value="pedicure-natural">Pedicure - Natural Nails (5k)</option>
+                    <option value="pedicure-artificial">Pedicure - Artificial Nails (6k)</option>
+                    <option value="soak-off-gel">Soak Off - Gel Polish Removal (2k)</option>
+                    <option value="soak-off-acrylic">Soak Off - Acrylic Removal (3k)</option>
+                    <option value="nail-art-simple">Extra Art - Simple Design (2k)</option>
+                    <option value="nail-art-complex">Extra Art - Complex Design (3k)</option>
                   </select>
+                </div>
+                
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="preferredDate" className="block text-sm font-medium text-salon-brown mb-1">
+                      Preferred Date
+                    </label>
+                    <input
+                      type="date"
+                      id="preferredDate"
+                      name="preferredDate"
+                      value={formData.preferredDate}
+                      onChange={handleChange}
+                      className="w-full px-4 py-2 border border-salon-peach rounded-md focus:outline-none focus:ring-2 focus:ring-salon-dark-pink"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="preferredTime" className="block text-sm font-medium text-salon-brown mb-1">
+                      Preferred Time
+                    </label>
+                    <input
+                      type="time"
+                      id="preferredTime"
+                      name="preferredTime"
+                      value={formData.preferredTime}
+                      onChange={handleChange}
+                      className="w-full px-4 py-2 border border-salon-peach rounded-md focus:outline-none focus:ring-2 focus:ring-salon-dark-pink"
+                    />
+                  </div>
                 </div>
                 
                 <div>
@@ -183,15 +296,16 @@ const Contact = () => {
                     onChange={handleChange}
                     rows={4}
                     className="w-full px-4 py-2 border border-salon-peach rounded-md focus:outline-none focus:ring-2 focus:ring-salon-dark-pink"
-                    placeholder="Any special requests or preferred date/time"
+                    placeholder="Any special requests or additional information"
                   ></textarea>
                 </div>
                 
                 <button
                   type="submit"
-                  className="btn w-full py-3"
+                  disabled={isSubmitting}
+                  className="btn w-full py-3 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Request Booking
+                  {isSubmitting ? 'Processing...' : 'Request Booking'}
                 </button>
               </form>
               

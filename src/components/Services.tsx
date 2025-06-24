@@ -94,12 +94,20 @@ const Services = () => {
             animationDelay: '1s', 
             animationTimingFunction: 'ease-out' 
           }}>
-          <button 
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            className="btn"
-          >
-            Book Appointment
-          </button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <button 
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              className="btn"
+            >
+              Book Appointment
+            </button>
+            <button 
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              className="btn bg-salon-light-brown hover:bg-salon-brown text-white px-6 py-3 rounded-lg transition-colors duration-200 font-medium"
+            >
+              Additional Services
+            </button>
+          </div>
         </div>
       </div>
     </section>
